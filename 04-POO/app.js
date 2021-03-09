@@ -1,9 +1,16 @@
 "use strict";
 var Rectangle = /** @class */ (function () {
-    function Rectangle(baseRect, heightRect, colorRect) {
-        this.rectangleBase = baseRect;
-        this.rectangleHeight = heightRect;
-        this.rectangleColor = colorRect;
+    /* private rectangleBase: number
+    private rectangleHeight: number
+    private rectangleColor: string */
+    function Rectangle(rectangleBase, rectangleHeight, rectangleColor) {
+        this.rectangleBase = rectangleBase;
+        this.rectangleHeight = rectangleHeight;
+        this.rectangleColor = rectangleColor;
+        /* this.rectangleBase = baseRect
+        this.rectangleHeight = heightRect
+        this.rectangleColor = colorRect
+        */
     }
     Rectangle.prototype.calculateArea = function () {
         // A = h * b

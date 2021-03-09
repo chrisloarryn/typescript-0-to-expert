@@ -1,13 +1,14 @@
 class Rectangle {
-  private rectangleBase: number
+  /* private rectangleBase: number
   private rectangleHeight: number
-  private rectangleColor: string
+  private rectangleColor: string */
 
-  constructor(baseRect: number, heightRect: number, colorRect: string) {
-    this.rectangleBase = baseRect
+  constructor(public rectangleBase: number, public rectangleHeight: number, public rectangleColor: string) {
+    /* this.rectangleBase = baseRect
     this.rectangleHeight = heightRect
     this.rectangleColor = colorRect
-  }
+    */
+  } 
 
   calculateArea(): number {
     // A = h * b
