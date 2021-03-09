@@ -24,6 +24,10 @@ class Rectangle {
     return P
   }
 
+  static calculatePerimeterRectangle(heightRect: number, baseRect: number) {
+    return (2 * heightRect) + (2 * baseRect)
+  }
+
   public printResult(result: number): void {
     // validations
     if (result < 10) {
@@ -31,6 +35,18 @@ class Rectangle {
     } else {
       console.log('values bigger than 10')
     }
+  }
+}
+
+class Circle {
+  static circlesNumber: number = 0
+  static readonly PI: number = 3.1416
+  constructor(private radio: number) {
+    Circle.circlesNumber++
+  }
+
+  calculateArea(): number {
+    return Math.PI * this.radio * this.radio
   }
 }
 
@@ -43,3 +59,17 @@ rectangle.calculateArea()
 rectangle2.calculateArea()
 // rectangle.printResult(11) // private method
 // rectangle.rectangleColor = 'Negro' // private property
+
+
+console.log(Math.pow(2, 2))
+
+const resultPerimeter = Rectangle.calculatePerimeterRectangle(2, 2)
+console.log(resultPerimeter)
+
+const circle1: Circle = new Circle(20)
+const circle2: Circle = new Circle(50)
+const circle3: Circle = new Circle(10)
+
+Circle.PI = ''
+
+console.log(`# of circles ${Circle.circlesNumber}`)
