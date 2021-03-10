@@ -70,6 +70,6 @@ const circle1: Circle = new Circle(20)
 const circle2: Circle = new Circle(50)
 const circle3: Circle = new Circle(10)
 
-Circle.PI = ''
+// Circle.PI = ''
 
 console.log(`# of circles ${Circle.circlesNumber}`)
