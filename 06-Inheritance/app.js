@@ -13,38 +13,44 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var MultimediaFile = /** @class */ (function () {
-    function MultimediaFile(createdAt, modifiedAt, name, elementType) {
-        this.createdAt = createdAt;
-        this.modifiedAt = modifiedAt;
-        this.name = name;
-        this.elementType = elementType;
+    function MultimediaFile() {
+        this.checkSum = '';
     }
-    MultimediaFile.prototype.uploadInfo = function () {
-        var information = this.name + " " + this.elementType + " " + this.modifiedAt + " " + this.createdAt;
-        console.log(information);
+    Object.defineProperty(MultimediaFile.prototype, "isValid", {
+        get: function () {
+            if (this.checkSum.length > 10)
+                return true;
+            else
+                return false;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(MultimediaFile.prototype, "newCheckSum", {
+        set: function (value) {
+            this.checkSum = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    MultimediaFile.prototype.validateCheckSum = function () {
+        return true;
+    };
+    MultimediaFile.prototype.GetType = function () {
+        return 'multimedia';
     };
     return MultimediaFile;
 }());
 var DynamicFile = /** @class */ (function (_super) {
     __extends(DynamicFile, _super);
-    // duration: string = ''
-    function DynamicFile(createdAt, modifiedAt, name, elementType, duration) {
-        var _this = _super.call(this, createdAt, modifiedAt, name, elementType) || this;
-        _this.createdAt = createdAt;
-        _this.modifiedAt = modifiedAt;
-        _this.name = name;
-        _this.elementType = elementType;
-        _this.duration = duration;
-        return _this;
+    function DynamicFile() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    DynamicFile.prototype.stop = function () {
-        console.log('stopping!');
-    };
-    DynamicFile.prototype.pause = function () {
-        console.log('pausing!');
-    };
-    DynamicFile.prototype.play = function () {
-        console.log('playing!');
+    DynamicFile.prototype.GetType = function () {
+        if (this.checkSum === '') {
+            this.validateCheckSum();
+        }
+        return 'dynamic';
     };
     return DynamicFile;
 }(MultimediaFile));
@@ -53,16 +59,28 @@ var StaticFile = /** @class */ (function (_super) {
     function StaticFile() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    StaticFile.prototype.edit = function () {
-        console.log('Editing!');
+    StaticFile.prototype.GetType = function () {
+        return 'static';
     };
     return StaticFile;
 }(MultimediaFile));
-var mFile = new MultimediaFile('13/09/1995', '13/09/2020', 'test.txt', 'text file');
-mFile.uploadInfo();
-var dFile = new DynamicFile('13/09/1995', '13/09/2020', 'test.txt', 'text file', '05:00');
-dFile.stop();
-var sFile = new StaticFile('13/09/1995', '13/09/2020', 'test.txt', 'text file');
-var mFile2 = dFile;
-var sFile2 = dFile;
-var dFile2 = mFile;
+var OtherFile = /** @class */ (function (_super) {
+    __extends(OtherFile, _super);
+    function OtherFile() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return OtherFile;
+}(MultimediaFile));
+var multimedia = new MultimediaFile();
+var dFile = new DynamicFile();
+var sFile = new StaticFile();
+var oFile = new OtherFile();
+multimedia = dFile;
+console.log(multimedia.GetType());
+multimedia = sFile;
+console.log(multimedia.GetType());
+multimedia = oFile;
+console.log(multimedia.GetType());
+console.log('multimedia isValid', multimedia.isValid);
+multimedia.newCheckSum = '8942136879012';
+console.log('multimedia isValid', multimedia.isValid);

@@ -1,73 +1,54 @@
 class MultimediaFile {
-  constructor(
-    public createdAt: string,
-    public modifiedAt: string,
-    public name: string,
-    public elementType: string
-  ) {}
-
-  uploadInfo(): void {
-    const information: string = `${this.name} ${this.elementType} ${this.modifiedAt} ${this.createdAt}`
-    console.log(information)
+  protected checkSum: string = ''
+  get isValid(): boolean {
+    if (this.checkSum.length > 10) return true
+    else return false
+  }
+  set newCheckSum(value: string) {
+    this.checkSum = value
+  }
+  protected validateCheckSum(): boolean {
+    return true
+  }
+  GetType(): string {
+    return 'multimedia'
   }
 }
 
 class DynamicFile extends MultimediaFile {
-  // duration: string = ''
-  constructor(
-    public createdAt: string,
-    public modifiedAt: string,
-    public name: string,
-    public elementType: string,
-    public duration: string
-  ) {
-    super(createdAt, modifiedAt, name, elementType)
-  }
-
-  stop(): void {
-    console.log('stopping!')
-  }
-
-  pause(): void {
-    console.log('pausing!')
-  }
-
-  play(): void {
-    console.log('playing!')
+  GetType(): string {
+    if (this.checkSum === '') {
+      this.validateCheckSum()
+    }
+    return 'dynamic'
   }
 }
 
 class StaticFile extends MultimediaFile {
-  edit(): void {
-    console.log('Editing!')
+  GetType(): string {
+    return 'static'
   }
 }
 
-const mFile = new MultimediaFile(
-  '13/09/1995',
-  '13/09/2020',
-  'test.txt',
-  'text file'
-)
-mFile.uploadInfo()
+class OtherFile extends MultimediaFile {
 
-const dFile = new DynamicFile(
-  '13/09/1995',
-  '13/09/2020',
-  'test.txt',
-  'text file',
-  '05:00'
-)
-dFile.stop()
-
-const sFile = new StaticFile(
-  '13/09/1995',
-  '13/09/2020',
-  'test.txt',
-  'text file'
-)
+}
 
 
-const mFile2: MultimediaFile = dFile
-const sFile2: StaticFile = dFile
-const dFile2: DynamicFile = mFile
+let multimedia: MultimediaFile = new MultimediaFile()
+const dFile: DynamicFile = new DynamicFile()
+const sFile: StaticFile = new StaticFile()
+const oFile: OtherFile = new OtherFile()
+
+multimedia = dFile
+console.log(multimedia.GetType())
+
+multimedia = sFile
+console.log(multimedia.GetType())
+
+multimedia = oFile
+console.log(multimedia.GetType())
+
+console.log('multimedia isValid', multimedia.isValid)
+multimedia.newCheckSum = '8942136879012'
+console.log('multimedia isValid', multimedia.isValid)
